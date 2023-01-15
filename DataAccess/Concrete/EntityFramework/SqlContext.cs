@@ -17,5 +17,6 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Member> Members { get; set; }
+        public DbSet<Editor> Editors { get; set; }
     }
 }
