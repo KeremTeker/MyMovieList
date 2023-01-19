@@ -21,7 +21,7 @@ namespace Business.Concrete
             return _genreDal.GetAll();
         }
 
-        public List<Genre> GetById(int genreId)
+        public Genre GetByGenreId(int genreId)
         {
             return _genreDal.Get(g => g.GenreId == genreId);
         }

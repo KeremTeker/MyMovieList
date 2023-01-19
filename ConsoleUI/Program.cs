@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Business.Abstract;
 using DataAccess.Concrete.InMemory;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Abstract;
@@ -12,11 +13,26 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            MovieTest();
+            //GenreTest();
 
-            MovieManager movieManager = new MovieManager(new EfMovieDal());
-            foreach (var movie in movieManager.GetAll()) 
+        }
+
+        private static void GenreTest()
+        {
+            GenreManager genreManager = new GenreManager(new EfGenreDal());
+            foreach (var genre in genreManager.GetAll())
             {
-                Console.WriteLine(movie.MovieDirector);
+                Console.WriteLine(genre.GenreName);
+            }
+        }
+
+        private static void MovieTest()
+        {
+            MovieManager movieManager = new MovieManager(new EfMovieDal());
+            foreach (var movie in movieManager.GetMovieDetails())
+            {
+                Console.WriteLine(movie.GenreName);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,11 @@ namespace DataAccess.Concrete.InMemory
         public List<Movie> GetAllByGenre(int movieGenreId)
         {
             return _movies.Where(m => m.GenreId == movieGenreId).ToList();
+        }
+
+        public List<MovieDetailDto> GetMovieDetails()
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Movie movie)

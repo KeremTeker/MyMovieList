@@ -8,6 +8,6 @@ namespace Business.Abstract
     public interface IGenreService
     {
         List<Genre> GetAll();
-        List<Genre> GetById(int genreId);
+        Genre GetByGenreId(int genreId);
     }
 }
