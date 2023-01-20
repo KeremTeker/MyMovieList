@@ -30,9 +30,19 @@ namespace ConsoleUI
         private static void MovieTest()
         {
             MovieManager movieManager = new MovieManager(new EfMovieDal());
-            foreach (var movie in movieManager.GetMovieDetails())
+
+            var result = movieManager.GetMovieDetails();
+
+            if (result.Success==true)
             {
-                Console.WriteLine(movie.GenreName);
+                foreach (var movie in result.Data)
+                {
+                    Console.WriteLine(movie.MovieName + "/" + movie.GenreName);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
             }
         }
     }

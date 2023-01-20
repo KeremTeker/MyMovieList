@@ -36,31 +36,31 @@ namespace Business.Concrete
         {
             if (DateTime.Now.Hour==22)
             {
-                return new ErrorResult();
+                return new ErrorDataResult<List<Movie>>(Messages.MaintenanceTime);
             }
 
             //iş kodları
-            return new SuccessDataResult<List<Movie>>(_movieDal.GetAll(),true,"Filmler listelendi");
+            return new SuccessDataResult<List<Movie>>(_movieDal.GetAll(),Messages.MovieListed);
         }
 
-        public List<Movie> GetAllByGenreId(int id)
+        public IDataResult<List<Movie>> GetAllByGenreId(int id)
         {
-            return _movieDal.GetAll(p => p.GenreId == id);
+            return new SuccessDataResult<List<Movie>>(_movieDal.GetAll(p => p.GenreId == id));
         }
 
-        public List<Movie> GetAllByMovieMyPoint(double min, double max)
+        public IDataResult<List<Movie>> GetAllByMovieMyPoint(double min, double max)
         {
-            return _movieDal.GetAll(p => p.MovieMyPoint >= min && p.MovieMyPoint <= max);
+            return new SuccessDataResult<List<Movie>> (_movieDal.GetAll(p => p.MovieMyPoint >= min && p.MovieMyPoint <= max));
         }
 
-        public Movie GetById(int movieId)
+        public IDataResult<Movie> GetById(int movieId)
         {
-            return _movieDal.Get(p => p.MovieId == movieId);
+            return new SuccessDataResult<Movie> (_movieDal.Get(p => p.MovieId == movieId));
         }
 
-        public List<MovieDetailDto> GetMovieDetails()
+        public IDataResult<List<MovieDetailDto>> GetMovieDetails()
         {
-            return _movieDal.GetMovieDetails();
+            return new SuccessDataResult<List<MovieDetailDto>>(_movieDal.GetMovieDetails());
         }
     }
 }

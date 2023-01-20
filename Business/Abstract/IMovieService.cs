@@ -15,6 +15,6 @@ namespace Business.Abstract
         IDataResult<List<MovieDetailDto>> GetMovieDetails();
 
         IResult Add(Movie movie);
-        IResult GetById(int movieId);
+        IDataResult<Movie> GetById(int movieId);
     }
 }
