@@ -9,12 +9,12 @@ namespace Business.Abstract
 {
     public interface IMovieService
     {
-        List<Movie> GetAll();
-        List<Movie> GetAllByGenreId(int id);
-        List<Movie> GetAllByMovieMyPoint(double min, double max);
-        List<MovieDetailDto> GetMovieDetails();
+        IDataResult<List<Movie>> GetAll();
+        IDataResult<List<Movie>> GetAllByGenreId(int id);
+        IDataResult<List<Movie>> GetAllByMovieMyPoint(double min, double max);
+        IDataResult<List<MovieDetailDto>> GetMovieDetails();
 
         IResult Add(Movie movie);
-        Movie GetById(int movieId);
+        IResult GetById(int movieId);
     }
 }

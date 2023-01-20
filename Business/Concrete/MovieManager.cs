@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
@@ -23,18 +24,23 @@ namespace Business.Concrete
         {
             if (movie.MovieName.Length<2)
             {
-                return new ErrorResult("Film ismi min 2 karatker olmalıdır");
+                //magic strings
+                return new ErrorResult(Messages.MovieNameInvalid);
             }
             //bussiness code
             _movieDal.Add(movie);
-            return new SuccessResult("Film ekledi");
+            return new SuccessResult(Messages.MovieAdded);
         }
 
-        public List<Movie> GetAll()
+        public IDataResult<List<Movie>> GetAll()
         {
+            if (DateTime.Now.Hour==22)
+            {
+                return new ErrorResult();
+            }
 
             //iş kodları
-            return _movieDal.GetAll();
+            return new SuccessDataResult<List<Movie>>(_movieDal.GetAll(),true,"Filmler listelendi");
         }
 
         public List<Movie> GetAllByGenreId(int id)
