@@ -19,8 +19,7 @@ namespace DataAccess.Concrete.EntityFramework
             using (SqlContext context = new SqlContext())
             {
                 var result = from p in context.Movies
-                             join g in context.Genres
-                             on p.GenreId equals g.GenreId
+                             join g in context.Genres on p.GenreId equals g.GenreId
                              select new MovieDetailDto
                              {
                                  MovieId = p.MovieId,

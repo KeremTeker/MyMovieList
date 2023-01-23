@@ -16,5 +16,7 @@ namespace Business.Abstract
 
         IResult Add(Movie movie);
         IDataResult<Movie> GetById(int movieId);
+
+        //RESTFUL --> HTTP --> 
     }
 }
