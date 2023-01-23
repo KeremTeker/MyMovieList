@@ -25,12 +25,37 @@ namespace WebAPI.Controllers
             _movieService = movieService;
         }
 
-        [HttpGet]
-        public List<Movie> Get()
+        [HttpGet("getall")]
+        public IActionResult GetAll()
         {
+            //Swagger hazır documentation
             //Dependency chain --
             var result=_movieService.GetAll();
-            return result.Data;
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int movieId)
+        {
+            var result = _movieService.GetById(movieId);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result);
+        }
+        [HttpPost("add")]
+        public IActionResult Add(Movie movie)
+        {
+            var result = _movieService.Add(movie);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
     }
 }

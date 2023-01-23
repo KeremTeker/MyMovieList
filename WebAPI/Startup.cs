@@ -29,6 +29,8 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Autofac, Ninject, CastleWindsor, StructureMap, Lightnject -->IoC Container
+            //AOP
             services.AddControllers();
             services.AddSingleton<IMovieService,MovieManager>();
             services.AddSingleton<IMovieDal, EfMovieDal>();
