@@ -47,6 +47,36 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+        [HttpGet("getallbygenreid")]
+        public IActionResult GetAllByGenreId(int Id)
+        {
+            var result = _movieService.GetAllByGenreId(Id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getallbymoviemypoint")]
+        public IActionResult GetAllByMovieMyPoint(double min, double max)
+        {
+            var result = _movieService.GetAllByMovieMyPoint(min, max);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getmoviedetails")]
+        public IActionResult GetMovieDetails()
+        {
+            var result = _movieService.GetMovieDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
         [HttpPost("add")]
         public IActionResult Add(Movie movie)
         {

@@ -11,5 +11,6 @@ namespace Business.Constants
         public static string MovieNameInvalid = "Film ismi geçersiz";
         public static string MaintenanceTime="Sistem Bakımda";
         public static string MovieListed="Ürünler Listelendi";
+        public static string MovieImdbPointInvalid = "Geçerli bir imdb puanı giriniz.";
     }
 }

@@ -32,8 +32,8 @@ namespace WebAPI
             //Autofac, Ninject, CastleWindsor, StructureMap, Lightnject -->IoC Container
             //AOP
             services.AddControllers();
-            services.AddSingleton<IMovieService,MovieManager>();
-            services.AddSingleton<IMovieDal, EfMovieDal>();
+            //services.AddSingleton<IMovieService,MovieManager>();
+            //services.AddSingleton<IMovieDal, EfMovieDal>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
