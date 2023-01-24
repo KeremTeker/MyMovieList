@@ -2,6 +2,7 @@
 using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
+using Business.CSS;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
 using DataAccess.Abstract;
@@ -18,6 +19,9 @@ namespace Business.DependencyResolvers.Autofac
         {
             builder.RegisterType<MovieManager>().As<IMovieService>().SingleInstance();
             builder.RegisterType<EfMovieDal>().As<IMovieDal>().SingleInstance();
+
+            builder.RegisterType<GenreManager>().As<IGenreService>().SingleInstance();
+            builder.RegisterType<EfGenreDal>().As<IGenreDal>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

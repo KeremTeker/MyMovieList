@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,14 +17,14 @@ namespace Business.Concrete
             _genreDal = genreDal;
         }
 
-        public List<Genre> GetAll()
+        public IDataResult<List<Genre>> GetAll()
         {
-            return _genreDal.GetAll();
+            return new SuccessDataResult<List<Genre>>(_genreDal.GetAll());
         }
 
-        public Genre GetByGenreId(int genreId)
+        public IDataResult<Genre> GetByGenreId(int genreId)
         {
-            return _genreDal.Get(g => g.GenreId == genreId);
+            return new SuccessDataResult<Genre>(_genreDal.Get(g => g.GenreId == genreId));
         }
     }
 }

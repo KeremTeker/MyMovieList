@@ -16,6 +16,7 @@ namespace Business.Abstract
 
         IResult Add(Movie movie);
         IDataResult<Movie> GetById(int movieId);
+        IResult Update(Movie movie);
 
         //RESTFUL --> HTTP --> 
     }

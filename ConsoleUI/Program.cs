@@ -21,7 +21,7 @@ namespace ConsoleUI
         private static void GenreTest()
         {
             GenreManager genreManager = new GenreManager(new EfGenreDal());
-            foreach (var genre in genreManager.GetAll())
+            foreach (var genre in genreManager.GetAll().Data)
             {
                 Console.WriteLine(genre.GenreName);
             }
@@ -29,7 +29,7 @@ namespace ConsoleUI
 
         private static void MovieTest()
         {
-            MovieManager movieManager = new MovieManager(new EfMovieDal());
+            MovieManager movieManager = new MovieManager(new EfMovieDal(), new GenreManager(new EfGenreDal()));
 
             var result = movieManager.GetMovieDetails();
 
