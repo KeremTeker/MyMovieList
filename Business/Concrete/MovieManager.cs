@@ -28,6 +28,8 @@ namespace Business.Concrete
             _movieDal = movieDal;
             _genreService = genreService;
         }
+        //Claim
+        //[SecuredOperation("admin,editor")]
         [ValidationAspect(typeof(MovieValidator))]
         public IResult Add(Movie movie)
         {
