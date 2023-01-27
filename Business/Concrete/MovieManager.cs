@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Business.Constants;
 using Business.CSS;
 using Business.ValidationRules.FluentValidation;
@@ -29,7 +30,7 @@ namespace Business.Concrete
             _genreService = genreService;
         }
         //Claim
-        //[SecuredOperation("admin,editor")]
+        [SecuredOperation("movie.add,admin")]
         [ValidationAspect(typeof(MovieValidator))]
         public IResult Add(Movie movie)
         {
