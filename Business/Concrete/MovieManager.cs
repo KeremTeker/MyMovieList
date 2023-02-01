@@ -3,6 +3,9 @@ using Business.BusinessAspect.Autofac;
 using Business.Constants;
 using Business.CSS;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Business;
@@ -32,6 +35,7 @@ namespace Business.Concrete
         //Claim
         [SecuredOperation("movie.add,admin")]
         [ValidationAspect(typeof(MovieValidator))]
+        [CacheRemoveAspect("IMovieService.Get")]
         public IResult Add(Movie movie)
         {
 
@@ -50,7 +54,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.MovieAdded);
 
         }
-
+        [CacheAspect]
         public IDataResult<List<Movie>> GetAll()
         {
             if (DateTime.Now.Hour == 22)
@@ -71,7 +75,8 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Movie>>(_movieDal.GetAll(p => p.MovieMyPoint >= min && p.MovieMyPoint <= max));
         }
-
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<Movie> GetById(int movieId)
         {
             return new SuccessDataResult<Movie>(_movieDal.Get(p => p.MovieId == movieId));
@@ -82,6 +87,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<MovieDetailDto>>(_movieDal.GetMovieDetails());
         }
         [ValidationAspect(typeof(MovieValidator))]
+        [CacheRemoveAspect("IMovieService.Get")]
         public IResult Update(Movie movie)
         {
             if (CheckIfMovieCountOfGenreCorrect(movie.GenreId).Success)
@@ -115,11 +121,22 @@ namespace Business.Concrete
         private IResult CheckIfGenreLimitExceded()
         {
             var result = _genreService.GetAll();
-            if (result.Data.Count>=15)
+            if (result.Data.Count >= 15)
             {
                 return new ErrorResult(Messages.GenreLimitExceded);
             }
             return new SuccessResult();
+        }
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Movie movie)
+        {
+            Add(movie);
+            if (movie.MovieDuration<80)
+            {
+                throw new Exception("");
+            }
+            Add(movie);
+            return null;
         }
     }
 }
