@@ -5,6 +5,7 @@ using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,6 +31,9 @@ namespace WebAPI.Controllers
         {
             //Swagger hazır documentation
             //Dependency chain --
+
+            Thread.Sleep(5000);
+
             var result=_movieService.GetAll();
             if (result.Success)
             {
