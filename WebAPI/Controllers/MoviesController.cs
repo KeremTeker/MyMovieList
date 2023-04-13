@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
             //Swagger hazır documentation
             //Dependency chain --
 
-            Thread.Sleep(5000);
+            Thread.Sleep(1000);
 
             var result=_movieService.GetAll();
             if (result.Success)
